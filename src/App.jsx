@@ -7,19 +7,25 @@ const fallbackImages = {
     'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1800&q=80',
 }
 
-const folderImages = (folder, count = 8) => {
-  const extensions = ['jpg', 'jpeg', 'png', 'webp']
-
-  return Array.from({ length: count }, (_, index) => index + 1).flatMap((number) =>
-    extensions.map((extension) => encodeURI(`/${folder}/pic${number}.${extension}`)),
-  )
-}
+const toPublicUrl = (path) => encodeURI(`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`)
 
 const imageGroups = {
-  bigbg: folderImages('Big bg'),
-  shop1: folderImages('shop1'),
-  shop2: folderImages('shop2'),
-  shop3: folderImages('shop3'),
+  bigbg: [toPublicUrl('Big bg/1.jpg'), toPublicUrl('Big bg/2.jpg')],
+  shop1: [
+    toPublicUrl('shop1/pic1.jpg'),
+    toPublicUrl('shop1/unnamed (1).jpg'),
+    toPublicUrl('shop1/unnamed (2).jpg'),
+  ],
+  shop2: [
+    toPublicUrl('shop2/20260215_125229.jpg'),
+    toPublicUrl('shop2/download.jpg'),
+    toPublicUrl('shop2/received_35071425292456260.jpg'),
+  ],
+  shop3: [
+    toPublicUrl('shop3/unnamed (3).jpg'),
+    toPublicUrl('shop3/unnamed (4).jpg'),
+    toPublicUrl('shop3/unnamed.jpg'),
+  ],
 }
 
 function useCyclingImage(sources, fallback, intervalMs = 3500) {
@@ -107,8 +113,10 @@ const maker = {
   name: 'ผู้จัดทำ: นาย พงศ์ภรณ์ พุกเกลี้ยง',
   email: 'aompongphorn@gmail.com',
   phone: '092-249-8524',
-  image: '/me.png',
+  image: toPublicUrl('me.png'),
 }
+
+const logoUrl = toPublicUrl('Food-Logo-Graphics-1-70.jpg')
 
 function App() {
   // ── Auth state ──────────────────────────────────────────
@@ -144,7 +152,7 @@ function App() {
     <div className="site-shell">
       <header className="topbar">
         <a className="brand" href="#home" aria-label="กลับไปหน้าแรก">
-          <img src="/Food-Logo-Graphics-1-70.jpg" alt="SFG Logo" className="brand-logo" />
+          <img src={logoUrl} alt="SFG Logo" className="brand-logo" />
           <span>ร้านอร่อยสระบุรี</span>
         </a>
 

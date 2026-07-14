@@ -2,6 +2,8 @@ import { useState } from 'react'
 import users from './users.json'
 import './Login.css'
 
+const toPublicUrl = (path) => encodeURI(`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`)
+
 export default function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -50,7 +52,7 @@ export default function Login({ onLoginSuccess }) {
         {/* Logo / Brand */}
         <div className="login-brand">
           <div className="login-logo">
-            <img src="/Food-Logo-Graphics-1-70.jpg" alt="SFG Logo" className="login-logo-img" />
+            <img src={toPublicUrl('Food-Logo-Graphics-1-70.jpg')} alt="SFG Logo" className="login-logo-img" />
           </div>
           <h1 className="login-title">Saraburi Food Guide</h1>
           <p className="login-subtitle">เข้าสู่ระบบเพื่อค้นหาร้านอร่อยในสระบุรี</p>
